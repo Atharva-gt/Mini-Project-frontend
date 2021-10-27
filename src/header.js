@@ -7,8 +7,8 @@ const Header =() =>{
       <div className="d-flex flex-wrap align-items-center justify-content-center ">
          <ul className="nav col-12 col-lg-auto me-lg-auto mb-2 justify-content-center mb-md-0">
           <li><NavLink to="" className="nav-link px-2 text-white">Home</NavLink></li>
-          {/* <li><NavLink to="" className="nav-link px-2 text-white">Features</NavLink></li>
-          <li><NavLink to="" className="nav-link px-2 text-white">Pricing</NavLink></li>
+          <li><NavLink to="/upload" className="nav-link px-2 text-white">Upload File</NavLink></li>
+          {/* <li><NavLink to="" className="nav-link px-2 text-white">Pricing</NavLink></li>
           <li><NavLink to="" className="nav-link px-2 text-white">FAQs</NavLink></li> */}
           <li><NavLink to="" className="nav-link px-2 text-white">About</NavLink></li>
         </ul>
