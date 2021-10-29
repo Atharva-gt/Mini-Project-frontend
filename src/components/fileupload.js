@@ -36,20 +36,7 @@ const Fileupload = () =>{
             })
         })
     }
-const uploadThumbnail=(e)=>{
-    const selFile=e.target.files[0];
-    console.log(selFile);
 
-    const tempform=new FormData();
-    tempform.append('file',selFile);
-
-    fetch(url + '/util/uploadFile',{method:'POST',body:tempform})
-    .then(res=>res.json())
-    .then(data=>{
-        console.log(data);
-        setThumbnail(selFile.name);
-        });
-}
 const uploadvideo =(e)=>{
     const selFile=e.target.files[0];
     console.log(selFile);
@@ -85,11 +72,7 @@ const uploadvideo =(e)=>{
                             <TextField className="w-100 mt-4" multiline variant="filled" label="discription" id="discription" onChange={handleChange} value={values.discription} ></TextField>
                             <TextField className="w-100 mt-4" variant="filled" label="category" id="category" onChange={handleChange} value={values.category} ></TextField>
                             <Grid container spacing={5}>
-                        <Grid item className="mt-4">
-                            <label>Upload thumbnail</label>
-                        <input onChange={uploadThumbnail} type="file" className="form-control"/> 
-
-                        </Grid>
+                        
                         <Grid item className="mt-4">
                             <label>Upload File</label>
                         <input onChange={uploadvideo} type="file" className="form-control"/> 
