@@ -24,7 +24,7 @@ const Signup = () => {
             .then((res) => {
                 console.log(res.status);
 
-                if (res.status == 200) {
+                if (res.status === 200) {
                     Swal.fire({
                         icon: 'success',
                         title: 'Signed Up!',
@@ -47,8 +47,8 @@ const Signup = () => {
     }
 
     return (
-        <div className="row">
-            <div className="col-md-4 mt-4">
+        <div className="row mx-auto">
+            <div className="col-md-4 mt-5">
 
             </div>
             <div className="col-md-5 form-container">

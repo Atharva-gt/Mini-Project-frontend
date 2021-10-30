@@ -1,98 +1,122 @@
-import { Button, Card, CardContent, Container, Grid, TextField } from "@mui/material";
-import { Formik } from "formik";
-import { useState } from "react";
-import Swal from "sweetalert2";
-import app_config from "../config";
+import { Button, Card, CardContent, Container, Grid, TextField } from '@mui/material';
+import { Formik } from 'formik';
+import { useState } from 'react';
+import Swal from 'sweetalert2';
+import app_config from '../config';
+import './file.css';
 
+const AddVideo = () => {
 
-const Fileupload = () =>{
+    const url = app_config.api_url;
 
     const [videoFile, setVideoFile] = useState("");
-    const url=app_config.api_url;
 
-    const videoform={
-        title:'',
-        discription :'',
-        category :'',
-        file :''
+    const videoForm = {
+        title: '',
+        description: '',
+        file: ''
     }
-    const videosubmit = (values) => {
+
+    const videoSubmit = (values) => {
+
         values.file = videoFile;
         console.log(values);
 
-        const reqOptions={
-            method:'POST',
-            body:JSON.stringify(values),
-            headers :{'Content-Type':'application/json'}
+        const reqOptions = {
+            method: 'POST',
+            body: JSON.stringify(values),
+            headers: { 'Content-Type': 'application/json' }
         };
+
         fetch(url + '/file/add', reqOptions)
-        .then(res => res.json())
-        .then(data => {
-            console.log(data);
-            Swal.fire({
-                icon: 'success',
-                title: 'Success',
-                text: 'Video Uploaded Successfully'
+            .then(res => res.json())
+            .then(data => {
+                console.log(data);
+                Swal.fire({
+                    icon: 'success',
+                    title: 'Success',
+                    text: 'Video Uploaded Successfully'
+                })
             })
-        })
+
     }
 
-const uploadvideo =(e)=>{
-    const selFile=e.target.files[0];
-    console.log(selFile);
+    
 
-    const tempform=new FormData();
-    tempform.append('file',selFile);
+    const uploadVideo = (e) => {
+        const selFile = e.target.files[0];
 
-    fetch(url + '/util/uploadFile',{method:'POST',body:tempform})
-    .then(res=>res.json())
-    .then(data => {
-        console.log(data);
-        setVideoFile(selFile.name);
-    });
-}
-    return(
-    <div>
+        console.log(selFile);
+
+        const tempForm = new FormData();
+        tempForm.append('file', selFile);
+
+        fetch(url + '/util/upFile', { method: 'POST', body: tempForm })
+            .then(res => res.json())
+            .then(data => {
+                console.log(data);
+                setVideoFile(selFile.name);
+            });
+    }
+
+    return (
+
         <Container>
 
             <Card>
-                <CardContent>
-                    <Grid container >
-                        <Grid item md={5}>
 
+                <CardContent>
+
+                    <Grid container>
+                        <Grid item md={5}>
+                            <img src="upl.svg" alt="upload"/>
                         </Grid>
                         <Grid item md={7}>
-                            <h2>Signup Form</h2>
-                        <Formik initialValues={videoform} onSubmit={videosubmit}>
-                    {({
-                        values, handleChange , handleSubmit
-                    })=>(
-                        <form onSubmit={handleSubmit}>
-                            <TextField className="w-100 mt-5" variant="filled" label="title" id="title" onChange={handleChange} value={values.title} ></TextField>
-                            <TextField className="w-100 mt-4" multiline variant="filled" label="discription" id="discription" onChange={handleChange} value={values.discription} ></TextField>
-                            <TextField className="w-100 mt-4" variant="filled" label="category" id="category" onChange={handleChange} value={values.category} ></TextField>
-                            <Grid container spacing={5}>
-                        
-                        <Grid item className="mt-4">
-                            <label>Upload File</label>
-                        <input onChange={uploadvideo} type="file" className="form-control"/> 
 
+                            <h2>File Upload</h2>
+
+                            <Formik initialValues={videoForm} onSubmit={videoSubmit} >
+
+                                {({ values, handleChange, handleSubmit }) => (
+                                    <form onSubmit={handleSubmit}>
+
+                                        <TextField label="Title" className="w-100 mt-5" variant="filled" id="title" onChange={handleChange} value={values.title} />
+                                        <TextField multiline label="Description" className="w-100 mt-4" variant="filled" id="description" onChange={handleChange} value={values.description} />
+                                        <Grid container spacing={5}>
+                                           
+                                            <Grid item className="mt-4">
+                                                <label >Upload File</label>
+                                                <input onChange={uploadVideo} className="form-control" type="file" />
+                                                <div className="progress-container">
+                                                 <div className="bg-progress"></div>
+                                                     <div className="inner-container">
+                                                    <div className="status">Uploading...</div>
+                                                      <div className="percent-container">
+                                                 <span className="percentage" id="progressPercent">0</span>%
+                                                     </div>
+                                                         <div className="progress-bar"></div>
+                                                    </div>
+                                                </div>
+                                            </Grid>
+                                        </Grid>
+
+                                        <Button type="submit" variant="contained" className="w-25 mt-5">Submit Video</Button>
+
+                                    </form>
+                                )}
+
+                            </Formik>
                         </Grid>
                     </Grid>
-                    <Button type="submit" variant="contained" className="w-25 mt-5">Submit Video</Button>
-                        </form>
-                        ) }
-                   </Formik>
-                        </Grid>
-                    </Grid>
-                  
-                    
+
+
+
                 </CardContent>
             </Card>
-        </Container>
-        
 
-    </div>
+        </Container>
+
     )
 }
-export default Fileupload;
+
+export default AddVideo;

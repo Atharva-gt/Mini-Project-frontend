@@ -1,0 +1,10 @@
+.bd{
+    color: black;
+    background-color: #4f7fe7;
+    border-radius: 5rem;
+    margin: 10px;
+    padding-right: 30px;
+    padding-left:30px;
+    width:auto;
+    font-weight:bolder;
+}
