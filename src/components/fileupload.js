@@ -4,6 +4,7 @@ import { useState } from 'react';
 import Swal from 'sweetalert2';
 import app_config from '../config';
 import './file.css';
+import './fileupload.css';
 
 const AddVideo = () => {
 
@@ -41,7 +42,7 @@ const AddVideo = () => {
 
     }
 
-    
+
 
     const uploadVideo = (e) => {
         const selFile = e.target.files[0];
@@ -65,36 +66,35 @@ const AddVideo = () => {
 
             <Card>
 
-                <CardContent>
+                <CardContent className="bg">
 
                     <Grid container className="mt-5">
                         <Grid item md={5}>
-                            <svg xlinkHref ="upl.svg" alt="upload"/>
+                            <svg xlinkHref="upl.svg" alt="upload" />
                         </Grid>
                         <Grid item md={7}>
-
-                            <h2>File Upload</h2>
+                            <h1>File Upload</h1>
 
                             <Formik initialValues={videoForm} onSubmit={videoSubmit} >
 
                                 {({ values, handleChange, handleSubmit }) => (
                                     <form onSubmit={handleSubmit}>
 
-                                        <TextField label="Title" className="w-100 mt-5" variant="filled" id="title" onChange={handleChange} value={values.title} />
-                                        <TextField multiline label="Description" className="w-100 mt-4" variant="filled" id="description" onChange={handleChange} value={values.description} />
+                                        <TextField label="Title" className="w-100 mt-5 tex" variant="filled" id="title" onChange={handleChange} value={values.title} />
+                                        <TextField multiline label="Description" className="w-100 mt-4 tex" variant="filled" id="description" onChange={handleChange} value={values.description} />
                                         <Grid container spacing={5}>
-                                           
+
                                             <Grid item className="mt-4">
                                                 <label >Upload File</label>
                                                 <input onChange={uploadVideo} className="form-control" type="file" />
                                                 <div className="progress-container">
-                                                 <div className="bg-progress"></div>
-                                                     <div className="inner-container">
-                                                    <div className="status">Uploading...</div>
-                                                      <div className="percent-container">
-                                                 <span className="percentage" id="progressPercent">0</span>%
-                                                     </div>
-                                                         <div className="progress-bar"></div>
+                                                    <div className="bg-progress"></div>
+                                                    <div className="inner-container">
+                                                        <div className="status">Uploading...</div>
+                                                        <div className="percent-container">
+                                                            <span className="percentage" id="progressPercent">0</span>%
+                                                        </div>
+                                                        <div className="progress-bar"></div>
                                                     </div>
                                                 </div>
                                             </Grid>

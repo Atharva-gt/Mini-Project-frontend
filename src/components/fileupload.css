@@ -1,0 +1,10 @@
+.bg{
+    background-image: linear-gradient(to bottom right,#1d53c7,rgb(186, 179, 245));
+    box-shadow: 5px black;
+}
+.tex{
+    background-color: rgb(211, 211, 211);
+}
+.line{
+    height: 150px;
+}
