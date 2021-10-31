@@ -6,6 +6,7 @@ import Signup from './components/Signup';
 import Fileupload from './components/fileupload';
 import Footer from './footer';
 import Home from './components/Home';
+import BrowseVideos from './components/downloadfile';
 
 function App() {
   return (
@@ -16,6 +17,7 @@ function App() {
     <Route path="/signup" component={Signup}></Route>
     <Route path="/upload" component={Fileupload}></Route>
     <Route path="/home" component={Home}></Route>
+    <Route path="/download" component={BrowseVideos}></Route>
     <Footer></Footer>
     </BrowserRouter>
   </div>
