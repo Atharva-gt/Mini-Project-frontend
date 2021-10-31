@@ -69,7 +69,7 @@ const AddVideo = () => {
 
                     <Grid container>
                         <Grid item md={5}>
-                            <img src="upl.svg" alt="upload"/>
+                            <imgg src="upl.svg" alt="upload"/>
                         </Grid>
                         <Grid item md={7}>
 

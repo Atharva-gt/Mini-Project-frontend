@@ -4,7 +4,7 @@ import './header.css';
 const Header =() =>{
     return(
       <div className=" bd">
-      <header className="d-flex  flex-wrap align-items-center justify-content-center justify-content-md-between py-3 mb-5 ">
+      <header className="d-flex  flex-wrap align-items-center justify-content-center justify-content-md-between py-2 mb-5 ">
         <ul className="nav col-12 col-md-auto mb-2 justify-content-center mb-md-0">
           <li><NavLink to="" className="nav-link px-2 link-dark">Home</NavLink></li>
           <li><NavLink to="" className="nav-link px-2 link-dark">Signup</NavLink></li>
