@@ -67,9 +67,9 @@ const AddVideo = () => {
 
                 <CardContent>
 
-                    <Grid container>
+                    <Grid container className="mt-5">
                         <Grid item md={5}>
-                            <imgg src="upl.svg" alt="upload"/>
+                            <img src="upl.svg" alt="upload"/>
                         </Grid>
                         <Grid item md={7}>
 
