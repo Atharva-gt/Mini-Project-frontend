@@ -5,6 +5,7 @@ import Login from './components/Login';
 import Signup from './components/Signup';
 import Fileupload from './components/fileupload';
 import Footer from './footer';
+import Home from './components/Home';
 
 function App() {
   return (
@@ -14,6 +15,7 @@ function App() {
     <Route path="/login" component={Login}></Route>
     <Route path="/signup" component={Signup}></Route>
     <Route path="/upload" component={Fileupload}></Route>
+    <Route path="/home" component={Home}></Route>
     <Footer></Footer>
     </BrowserRouter>
   </div>
