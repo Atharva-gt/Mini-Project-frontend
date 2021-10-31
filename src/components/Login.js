@@ -2,6 +2,8 @@ import { Formik } from "formik";
 import { useEffect, useState } from "react";
 import Swal from "sweetalert2";
 import app_config from "../config";
+import LockOpenIcon from '@mui/icons-material/LockOpen';
+import './login.css';
 
 const Login = () => {
 
@@ -20,59 +22,47 @@ const Login = () => {
         email: '',
         password: ''
     }
-
-    const SubmitLogin = (values) => {
-        console.log(values);
-        // values.username = "Leon Kennedy";
-
-        // sessionStorage.setItem('user', JSON.stringify(values));
-        // window.location.replace('/productlist');
-
-
-        fetch(url+'/user/getbyemail/'+values.email)
-        .then( (res) => {
-            console.log(res.status);
-            return res.json();
-        } )
-        .then( (data) => {
-            if(data){
-
-                if(data.password == values.password){
-                    Swal.fire({
-                        icon : 'success',
-                        title: 'Success',
-                        text : 'Logged in successfully!'
-                    })
-
-                    console.log('login success')
-
-                    return;
-                }else{
-                    console.log('password incorrect');
-                }
-
-
-            }else{
-                console.log('user not found')
+        const SubmitLogin = (values) => {
+            console.log(values);
+            const reqOptions = {
+                method: 'POST',
+                body: JSON.stringify(values),
+                headers: { 'Content-Type': 'application/json' }
             }
-
-            Swal.fire({
-                icon : 'error',
-                title : 'Error',
-                text : 'Something went wrong!'
+            fetch(url + '/user/login', reqOptions)
+            .then((res) => {
+                console.log(res.status);
+    
+                if (res.status == 200 ) {
+                    res.json()
+                    .then((data) => {
+                        sessionStorage.setItem('user',JSON.stringify(data));
+                        console.log(data);
+                        window.location.replace('/share')
+                    })
+    
+                    Swal.fire({
+                        icon: 'success',
+                        title: 'Signed Up!',
+                        text: 'You have successfully Registered'
+                    });
+                } else if(res.status==300) {
+                    Swal.fire({
+                        icon: 'error',
+                        title: 'Error!',
+                        text: 'Something went wrong'
+                    });
+                }
+    
+                return res.json();
             })
-
-        } )
-
-    }
-
-    return (
+}
+return (
         <div className="col-md-3 mx-auto">
-            <div className="card" style={{ marginTop: '5rem', border: 'none', boxShadow: '0px 4px 5px -2px rgba(0,0,0,0.2),0px 7px 10px 1px rgba(0,0,0,0.14),0px 2px 16px 1px rgba(0,0,0,0.12)' }}>
+            <div className="card" style={{ border: 'none', boxShadow: '0px 4px 5px -2px rgba(0,0,0,0.2),0px 7px 10px 1px rgba(0,0,0,0.14),0px 2px 16px 1px rgba(0,0,0,0.12)' }}>
                 <div className="card-body">
-
-                    <h3 className="mt-5 text-center">Login Form</h3>
-                    <hr />
+                        <LockOpenIcon className="lo" />
+                    <h3 className="mt-1 text-center">Login Form</h3>
 
                     <Formik initialValues={loginform} onSubmit={SubmitLogin}>
                         {({

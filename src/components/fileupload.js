@@ -3,9 +3,8 @@ import { Formik } from 'formik';
 import { useState } from 'react';
 import Swal from 'sweetalert2';
 import app_config from '../config';
-import './file.css';
 import './fileupload.css';
-
+import img from './upl.png';
 const AddVideo = () => {
 
     const url = app_config.api_url;
@@ -70,7 +69,7 @@ const AddVideo = () => {
 
                     <Grid container className="mt-5">
                         <Grid item md={5}>
-                            <svg xlinkHref="upl.svg" alt="upload" />
+                            <img src="upl.png" alt="upload" />
                         </Grid>
                         <Grid item md={7}>
                             <h1>File Upload</h1>

@@ -20,11 +20,11 @@ const Signup = () => {
             headers: { 'Content-Type': 'application/json' }
         }
 
-        fetch(url + '/user/video', reqOptions)
+        fetch(url + '/user/add', reqOptions)
             .then((res) => {
                 console.log(res.status);
 
-                if (res.status === 200) {
+                if (res.status == 200) {
                     Swal.fire({
                         icon: 'success',
                         title: 'Signed Up!',
