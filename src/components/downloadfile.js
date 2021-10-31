@@ -9,7 +9,7 @@ const BrowseVideos = () => {
   const [loading, setLoading] = useState(true);
 
   const fetchVideos = () => {
-    fetch(url + "/video/getall")
+    fetch(url + "/file/getall")
       .then((res) => res.json())
       .then((data) => {
         console.log(data);
@@ -32,7 +32,7 @@ const BrowseVideos = () => {
                 <Card>
                   <CardMedia
                     component="img"
-                    image={url + "/" + video.thumbnail}
+                    image={url + "/" + video.file}
                   />
                   <CardContent>
                     <h2>{video.title}</h2>
@@ -48,7 +48,7 @@ const BrowseVideos = () => {
 
   return (
     <Container>
-      <h2>Browse Videos</h2>
+      <h2>Download Available Files</h2>
       <hr />
 
       {showVideo()}
