@@ -1,111 +1,98 @@
-import * as React from 'react';
-import Avatar from '@mui/material/Avatar';
-import Button from '@mui/material/Button';
-import CssBaseline from '@mui/material/CssBaseline';
-import TextField from '@mui/material/TextField';
-import FormControlLabel from '@mui/material/FormControlLabel';
-import Checkbox from '@mui/material/Checkbox';
-import Link from '@mui/material/Link';
-import Grid from '@mui/material/Grid';
-import Box from '@mui/material/Box';
-import LockOutlinedIcon from '@mui/icons-material/LockOutlined';
-import Typography from '@mui/material/Typography';
-import Container from '@mui/material/Container';
-import { createTheme, ThemeProvider } from '@mui/material/styles';
+import { Formik } from "formik";
+import { useEffect, useState } from "react";
+import Swal from "sweetalert2";
+import app_config from "../config";
 
-function Copyright(props) {
-  return (
-    <Typography variant="body2" color="text.secondary" align="center" {...props}>
-      {'Copyright © '}
-      <Link color="inherit" href="https://mui.com/">
-        Your Website
-      </Link>{' '}
-      {new Date().getFullYear()}
-      {'.'}
-    </Typography>
-  );
+const Login = () => {
+
+    const url = app_config.api_url;
+    const [mystate, setMystate] = useState("not intiliazed");
+
+    useEffect(() => {
+
+        setMystate('Initilized');
+        console.log('Inside UseEffect');
+
+
+    }, [])
+
+    const loginform = {
+        email: '',
+        password: ''
+    }
+
+    const SubmitLogin = (values) => {
+        console.log(values);
+        // values.username = "Leon Kennedy";
+
+        // sessionStorage.setItem('user', JSON.stringify(values));
+        // window.location.replace('/productlist');
+
+
+        fetch(url+'/user/getbyemail/'+values.email)
+        .then( (res) => {
+            console.log(res.status);
+            return res.json();
+        } )
+        .then( (data) => {
+            if(data){
+
+                if(data.password == values.password){
+                    Swal.fire({
+                        icon : 'success',
+                        title: 'Success',
+                        text : 'Logged in successfully!'
+                    })
+
+                    console.log('login success')
+
+                    return;
+                }else{
+                    console.log('password incorrect');
+                }
+
+
+            }else{
+                console.log('user not found')
+            }
+
+            Swal.fire({
+                icon : 'error',
+                title : 'Error',
+                text : 'Something went wrong!'
+            })
+
+        } )
+
+    }
+
+    return (
+        <div className="col-md-3 mx-auto">
+            <div className="card" style={{ marginTop: '5rem', border: 'none', boxShadow: '0px 4px 5px -2px rgba(0,0,0,0.2),0px 7px 10px 1px rgba(0,0,0,0.14),0px 2px 16px 1px rgba(0,0,0,0.12)' }}>
+                <div className="card-body">
+
+                    <h3 className="mt-5 text-center">Login Form</h3>
+                    <hr />
+
+                    <Formik initialValues={loginform} onSubmit={SubmitLogin}>
+                        {({
+                            values, handleChange, handleSubmit
+                        }) => (
+                            <form onSubmit={handleSubmit}>
+                                <label className="mt-3" htmlFor="email">Email</label>
+                                <input id="email" className="form-control" type="email" value={values.email} onChange={handleChange} />
+
+                                <label className="mt-3" htmlFor="password">Password</label>
+                                <input id="password" className="form-control" type="password" value={values.password} onChange={handleChange} />
+
+                                <button className="btn btn-primary mt-5 w-100">SUBMIT</button>
+                            </form>
+                        )}
+                    </Formik>
+                </div>
+            </div>
+        </div>
+    )
 }
 
-const theme = createTheme();
-
-export default function SignIn() {
-  const handleSubmit = (event) => {
-    event.preventDefault();
-    const data = new FormData(event.currentTarget);
-    // eslint-disable-next-line no-console
-    console.log({
-      email: data.get('email'),
-      password: data.get('password'),
-    });
-  };
-
-  return (
-    <ThemeProvider theme={theme}>
-      <Container component="main" maxWidth="xs">
-        <CssBaseline />
-        <Box
-          sx={{
-            marginTop: 8,
-            display: 'flex',
-            flexDirection: 'column',
-            alignItems: 'center',
-          }}
-        >
-          <Avatar sx={{ m: 1, bgcolor: 'secondary.main' }}>
-            <LockOutlinedIcon />
-          </Avatar>
-          <Typography component="h1" variant="h5">
-            Sign in
-          </Typography>
-          <Box component="form" onSubmit={handleSubmit} noValidate sx={{ mt: 1 }}>
-            <TextField
-              margin="normal"
-              required
-              fullWidth
-              id="email"
-              label="Email Address"
-              name="email"
-              autoComplete="email"
-              autoFocus
-            />
-            <TextField
-              margin="normal"
-              required
-              fullWidth
-              name="password"
-              label="Password"
-              type="password"
-              id="password"
-              autoComplete="current-password"
-            />
-            <FormControlLabel
-              control={<Checkbox value="remember" color="primary" />}
-              label="Remember me"
-            />
-            <Button
-              type="submit"
-              fullWidth
-              variant="contained"
-              sx={{ mt: 3, mb: 2 }}
-            >
-              Sign In
-            </Button>
-            <Grid container>
-              <Grid item xs>
-                <Link href="#" variant="body2">
-                  Forgot password?
-                </Link>
-              </Grid>
-              <Grid item>
-                <Link href="#" variant="body2">
-                  {"Don't have an account? Sign Up"}
-                </Link>
-              </Grid>
-            </Grid>
-          </Box>
-        </Box>
-        <Copyright sx={{ mt: 8, mb: 4 }} />
-      </Container>
-    </ThemeProvider>
-  );
-}
+export default Login;
