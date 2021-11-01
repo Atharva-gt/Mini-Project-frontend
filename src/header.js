@@ -1,5 +1,9 @@
 import { NavLink } from "react-router-dom";
-import "./header.css";
+import HomeIcon from '@mui/icons-material/Home';
+import DriveFolderUploadRoundedIcon from '@mui/icons-material/DriveFolderUploadRounded';
+import DownloadingRoundedIcon from '@mui/icons-material/DownloadingRounded';
+import InfoRoundedIcon from '@mui/icons-material/InfoRounded';
+import './header.css';
 
 const Header = () => {
   return (
@@ -31,6 +35,10 @@ const Header = () => {
               About
             </NavLink>
           </li>
+          <li><NavLink to="/home" className="nav-link px-3 link-dark"><HomeIcon className="fit" />Home</NavLink></li>
+          <li><NavLink to="/upload" className="nav-link px-2 link-dark"><DriveFolderUploadRoundedIcon className="fit"/>Upload</NavLink></li>
+          <li><NavLink to="/download" className="nav-link px-2 link-dark"><DownloadingRoundedIcon className="fit" />Download</NavLink></li>
+          <li><NavLink to="#" className="nav-link px-2 link-dark"><InfoRoundedIcon className="fit" />About</NavLink></li>
         </ul>
 
         <div className="col-md-3 text-end">
