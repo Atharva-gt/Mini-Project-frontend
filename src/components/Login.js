@@ -2,8 +2,8 @@ import { Formik } from "formik";
 import { useEffect, useState } from "react";
 import Swal from "sweetalert2";
 import app_config from "../config";
-import LockOpenIcon from '@mui/icons-material/LockOpen';
-import './login.css';
+import LockOpenIcon from "@mui/icons-material/LockOpen";
+import "./login.css";
 
 const Login = () => {
   const url = app_config.api_url;
