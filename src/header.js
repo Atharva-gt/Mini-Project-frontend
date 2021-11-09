@@ -25,7 +25,7 @@ const Header = () => {
           <li>
             <NavLink to="/browse" className="nav-link px-2 link-dark">
               <DownloadingRoundedIcon className="fit" />
-              Download
+              Manage Files
             </NavLink>
           </li>
           <li>
