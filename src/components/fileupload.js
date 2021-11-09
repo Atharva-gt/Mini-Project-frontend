@@ -1,11 +1,4 @@
-import {
-  Button,
-  Card,
-  CardContent,
-  Container,
-  Grid,
-  TextField,
-} from "@mui/material";
+import { Button,Card,CardContent,Container,Grid,TextField,} from "@mui/material";
 import { Formik } from "formik";
 import { useState } from "react";
 import Swal from "sweetalert2";
@@ -16,18 +9,15 @@ const AddVideo = () => {
   const url = app_config.api_url;
 
   const [videoFile, setVideoFile] = useState("");
-
   const videoForm = {
     title: "",
     description: "",
     file: "",
     user: JSON.parse(sessionStorage.getItem("user")),
   };
-
-  const videoSubmit = (values) => {
+const videoSubmit = (values) => {
     values.file = videoFile;
     console.log(values);
-
     const reqOptions = {
       method: "POST",
       body: JSON.stringify(values),
@@ -47,13 +37,10 @@ const AddVideo = () => {
   };
 
   const uploadVideo = (e) => {
-    const selFile = e.target.files[0];
-
-    console.log(selFile);
-
-    const tempForm = new FormData();
-    tempForm.append("file", selFile);
-
+  const selFile = e.target.files[0];
+  console.log(selFile);
+  const tempForm = new FormData();
+  tempForm.append("file", selFile);
     fetch(url + "/util/upFile", { method: "POST", body: tempForm })
       .then((res) => res.json())
       .then((data) => {
@@ -101,19 +88,7 @@ const AddVideo = () => {
                           className="form-control"
                           type="file"
                         />
-                        <div className="progress-container">
-                          <div className="bg-progress"></div>
-                          <div className="inner-container">
-                            <div className="status">Uploading...</div>
-                            <div className="percent-container">
-                              <span className="percentage" id="progressPercent">
-                                0
-                              </span>
-                              %
-                            </div>
-                            <div className="progress-bar"></div>
-                          </div>
-                        </div>
+                       
                       </Grid>
                     </Grid>
 
@@ -122,7 +97,7 @@ const AddVideo = () => {
                       variant="contained"
                       className="w-25 mt-5"
                     >
-                      Submit Video
+                      Submit File
                     </Button>
                   </form>
                 )}

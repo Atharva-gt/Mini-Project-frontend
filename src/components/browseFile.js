@@ -39,9 +39,7 @@ const BrowseFiles = () => {
     }
   };
 
-  useEffect(() => {
-    fetchFiles();
-  }, []);
+  useEffect(() => {fetchFiles();}, []);
 
   return <div>{displayFiles()}</div>;
 };
