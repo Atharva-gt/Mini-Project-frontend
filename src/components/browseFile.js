@@ -3,6 +3,10 @@ import { useState } from "react";
 import { useEffect } from "react";
 import app_config from "../config";
 import thumbnail from '../images/thumbnail.png';
+import DeleteOutlineIcon from '@mui/icons-material/DeleteOutline';
+import ContentCopyIcon from '@mui/icons-material/ContentCopy';
+import './br.css';
+import { Container } from "@material-ui/core";
 
 const BrowseFiles = () => {
   const [fileList, setFileList] = useState([]);
@@ -28,26 +32,36 @@ const BrowseFiles = () => {
       return res.json();
     })
   }
-  
+  const fileLink=(filename)=>{
+    const downloadurl=url + "/download/" + filename;
+      if (window.clipboardData) { 
+          window.clipboardData.setData("Link", downloadurl);
+      } 
+   navigator.clipboard.writeText(downloadurl).then(function() {
+  console.log('Async: Copying to clipboard was successful!');
+}, function(err) {
+  console.error('Async: Could not copy text: ', err);
+});
+  }
 
   const displayFiles = () => {
     if (!loading) {
       return (
-        <Grid container spacing={5}>
+        <Grid container spacing={2}>
           {fileList.map((file) => (
             <Grid item xs={3}>
-              <Card>
+              <Card sx={{ width: 280 }}>
           
-                <CardMedia component="img" image={thumbnail}/>
+                <CardMedia sx={{ width: 180 }} component="img" image={thumbnail}/>
                 <CardContent>
-                  <h3>{file.title}</h3>
-                  <h4>{file.description}</h4>
+                  <h3>Title : {file.title}</h3>
+                  <h4>Discription : {file.description}</h4>
                 </CardContent>
                 <CardActions>
-                  <Button onClick={e=>deletefile(file._id)}>
+                  <Button onClick={e=>deletefile(file._id)} variant="contained" startIcon={<DeleteOutlineIcon />}>
                     Delete
                   </Button>
-                  <Button>
+                  <Button onClick={e=>fileLink(file.file)} variant="contained" startIcon={<ContentCopyIcon/>}>
                   Copy Link
                   </Button>
                 </CardActions>
@@ -61,7 +75,7 @@ const BrowseFiles = () => {
 
   useEffect(() => {fetchFiles();}, []);
 
-  return <div>{displayFiles()}</div>;
+  return <Container>{displayFiles()}</Container>;
 };
 
 export default BrowseFiles;

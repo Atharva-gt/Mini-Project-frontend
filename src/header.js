@@ -1,7 +1,7 @@
 import { NavLink } from "react-router-dom";
 import HomeIcon from "@mui/icons-material/Home";
 import DriveFolderUploadRoundedIcon from "@mui/icons-material/DriveFolderUploadRounded";
-import DownloadingRoundedIcon from "@mui/icons-material/DownloadingRounded";
+import ManageAccountsRoundedIcon from '@mui/icons-material/ManageAccountsRounded';
 import InfoRoundedIcon from "@mui/icons-material/InfoRounded";
 import "./header.css";
 
@@ -24,7 +24,7 @@ const Header = () => {
           </li>
           <li>
             <NavLink to="/browse" className="nav-link px-2 link-dark">
-              <DownloadingRoundedIcon className="fit" />
+              <ManageAccountsRoundedIcon className="fit" />
               Manage Files
             </NavLink>
           </li>
